@@ -3,6 +3,10 @@ const todoInput = document.getElementById("todo-input");
 
 const viewModel = viewModelFactory()
 
+function updateStorage() {
+    localStorage.setItem('todos', JSON.stringify(viewModel.todos()))
+}
+
 function viewModelFactory() {
 
     const self = {
@@ -19,7 +23,7 @@ function viewModelFactory() {
             completed: false
         }
         self.todos.push(newTodo)
-        localStorage.setItem('todos', JSON.stringify(self.todos().sort((a, b) => a.date + b.date)))
+        updateStorage()
         todoInput.value = '';
     }
 
@@ -29,10 +33,10 @@ function viewModelFactory() {
 
 function removeTodo(todo) {
     viewModel.todos.remove(todo);
-    localStorage.setItem('todos', JSON.stringify(viewModel.todos()))
+    updateStorage()
 }
 
 function updateComplete(todo) {
     viewModel.todos.replace(todo, { ...todo, completed: !todo.completed })
-    localStorage.setItem('todos', JSON.stringify(viewModel.todos()))
+    updateStorage()
 }
