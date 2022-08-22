@@ -19,6 +19,7 @@
         </form>
     </header>
     <div class="todo-wrapper">
+        <!-- ko if: todos().length -->
         <ul class="todo-list" data-bind="foreach: todos">
             <li>
                 <div>
@@ -29,8 +30,14 @@
                             data-bind="click: updateComplete">Update</button></p>
                 </div>
             </li>
-
         </ul>
+        <!-- /ko -->
+        <!-- ko ifnot: todos().length -->
+        <div>
+            <h3 style="text-align: center">No Todos Yet!</h3>
+            <p>Add a Todo above to populate this field</p>
+        </div>
+        <!-- /ko -->
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js"
