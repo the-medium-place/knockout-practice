@@ -33,8 +33,6 @@ function removeTodo(todo) {
 }
 
 function updateComplete(todo) {
-
     viewModel.todos.replace(todo, { ...todo, completed: !todo.completed })
     localStorage.setItem('todos', JSON.stringify(viewModel.todos()))
-
 }
