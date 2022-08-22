@@ -7,7 +7,7 @@ function viewModelFactory() {
 
     const self = {
         title: 'KO Todos!!',
-        todos: ko.observableArray(savedTodos).sort((a, b) => a.date - b.date)
+        todos: ko.observableArray(savedTodos)
     }
 
     self.saveTodo = function () {
@@ -19,12 +19,17 @@ function viewModelFactory() {
             completed: false
         }
         self.todos.push(newTodo)
-        localStorage.setItem('todos', JSON.stringify(self.todos()))
+        localStorage.setItem('todos', JSON.stringify(self.todos().sort((a, b) => a.date + b.date)))
         todoInput.value = '';
     }
 
     ko.applyBindings(self)
     return self;
+}
+
+function removeTodo(todo) {
+    viewModel.todos.remove(todo);
+    localStorage.setItem('todos', JSON.stringify(viewModel.todos()))
 }
 
 function updateComplete(todo) {
